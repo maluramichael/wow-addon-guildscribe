@@ -1,0 +1,67 @@
+-- Luacheck configuration for GuildScribe
+-- WoW TBC Classic addon
+
+std = "lua51"
+codes = true
+quiet = 1
+max_line_length = false
+
+exclude_files = {
+    ".release/",
+    "libs/",
+    "Libs/",
+    ".git/",
+}
+
+ignore = {
+    "212",          -- Unused argument (common in event handlers)
+    "213",          -- Unused loop variable
+    "311",          -- Value assigned to variable is unused
+    "211/addonName", -- Unused addonName from addon bootstrap
+}
+
+-- Addon-specific globals
+globals = {
+    "_G",
+    "GuildScribe",
+}
+
+-- WoW API globals
+read_globals = {
+    -- Lua standard
+    "abs", "ceil", "floor", "max", "min", "mod", "random", "sqrt",
+    "format", "gmatch", "gsub", "strbyte", "strfind", "strlen", "strlower",
+    "strmatch", "strsub", "strupper", "strsplit", "strjoin", "strtrim",
+    "date", "time", "difftime",
+    "sort", "tinsert", "tremove", "wipe", "unpack",
+    "pairs", "ipairs", "next", "select", "type", "tonumber", "tostring",
+    "getmetatable", "setmetatable", "rawget", "rawset",
+    "pcall", "xpcall", "error", "assert", "loadstring",
+    "print", "debugstack",
+
+    -- Libraries
+    "LibStub",
+
+    -- Frame API
+    "CreateFrame", "UIParent", "UISpecialFrames", "GameTooltip", "GameFontNormal",
+    "GameFontNormalSmall", "GameFontHighlight", "GameFontHighlightSmall",
+    "ChatFontNormal",
+
+    -- Unit API
+    "UnitName", "UnitGUID", "UnitLevel", "UnitClass",
+
+    -- Guild API
+    "IsInGuild", "GetNumGuildMembers", "GetGuildRosterInfo",
+    "GuildRoster", "GuildRosterSetPublicNote", "GuildRosterSetOfficerNote",
+
+    -- Skill API
+    "GetNumSkillLines", "GetSkillLineInfo", "ExpandSkillHeader",
+    "CollapseSkillHeader",
+
+    -- Misc API
+    "GetTime", "GetRealmName", "GetAddOnMetadata",
+    "InCombatLockdown", "InterfaceOptionsFrame_OpenToCategory",
+    "Settings", "C_Timer",
+    "IsControlKeyDown",
+    "RAID_CLASS_COLORS",
+}
