@@ -1,10 +1,10 @@
-local addonName = ...
-local GuildScribe = LibStub("AceAddon-3.0"):GetAddon(addonName)
+local addonName, addon = ...
+local GuildScribe = addon
 
-function GuildScribe:RegisterConfig()
-    local options = {
-        name = "GuildScribe",
+function GuildScribe:GetOptionsTable()
+    return {
         type = "group",
+        name = "GuildScribe",
         args = {
             general = {
                 name = "General",
@@ -67,11 +67,7 @@ function GuildScribe:RegisterConfig()
                         set = function(_, val) self.db.profile.formatString = val end,
                     },
                     variables = {
-                        name = "Available Variables",
-                        type = "description",
-                        order = 2,
-                        fontSize = "medium",
-                        text = "|cFFFFD100Professions:|r\n" ..
+                        name = "|cFFFFD100Professions:|r\n" ..
                             "  {prof1} / {prof2} - Abbreviation (e.g. Alch, Herb)\n" ..
                             "  {prof1_name} / {prof2_name} - Full name\n" ..
                             "  {prof1_level} / {prof2_level} - Current level\n" ..
@@ -84,19 +80,18 @@ function GuildScribe:RegisterConfig()
                             "  {name} - Character name\n" ..
                             "  {level} - Character level\n" ..
                             "  {class} - Class name",
+                        type = "description",
+                        order = 2,
+                        fontSize = "medium",
                     },
                     preview = {
-                        name = "Preview",
-                        type = "description",
-                        order = 3,
-                        fontSize = "medium",
-                        text = function()
-                            local text = self:GetNotePreview(self.db.profile.formatString)
-                            local len = strlen(text)
+                        name = function()
+                            local noteText = self:GetNotePreview(self.db.profile.formatString)
+                            local len = strlen(noteText)
                             local maxLen = self:GetMaxNoteLength()
                             local colorCode = len > maxLen and "|cFFFF0000" or "|cFF00FF00"
 
-                            local result = "\n|cFFFFD100Result:|r |cFFFFFFFF" .. text .. "|r\n"
+                            local result = "\n|cFFFFD100Result:|r |cFFFFFFFF" .. noteText .. "|r\n"
                             result = result .. "|cFFFFD100Length:|r " .. colorCode .. len .. "/" .. maxLen .. "|r"
 
                             if len > maxLen then
@@ -105,6 +100,9 @@ function GuildScribe:RegisterConfig()
 
                             return result
                         end,
+                        type = "description",
+                        order = 3,
+                        fontSize = "medium",
                     },
                 },
             },
@@ -174,21 +172,17 @@ function GuildScribe:RegisterConfig()
                 inline = true,
                 args = {
                     info = {
-                        name = "",
-                        type = "description",
-                        order = 1,
-                        fontSize = "medium",
-                        text = "|cFFFFD100/gs|r - Open this options panel\n" ..
+                        name = "|cFFFFD100/gs|r - Open this options panel\n" ..
                             "|cFFFFD100/gs update|r - Force update guild note\n" ..
                             "|cFFFFD100/gs preview|r - Show formatted note in chat\n" ..
                             "|cFFFFD100/gs toggle|r - Enable/disable the addon\n" ..
                             "|cFFFFD100/gs debug|r - Toggle debug messages",
+                        type = "description",
+                        order = 1,
+                        fontSize = "medium",
                     },
                 },
             },
         },
     }
-
-    LibStub("AceConfig-3.0"):RegisterOptionsTable(addonName, options)
-    LibStub("AceConfigDialog-3.0"):AddToBlizOptions(addonName, "GuildScribe")
 end

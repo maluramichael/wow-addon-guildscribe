@@ -47,7 +47,7 @@ local defaults = {
 }
 
 -- State
-local professionData = {}
+local professionData = { primaries = {}, secondaries = {} }
 local waitingForRoster = false
 local updateTimer = nil
 
@@ -282,7 +282,7 @@ ScheduleUpdate = function()
         ScanProfessions()
         -- Request guild roster data, then update note when it arrives
         waitingForRoster = true
-        GuildRoster()
+        C_GuildInfo.GuildRoster()
     end)
 end
 
@@ -293,7 +293,8 @@ function GuildScribe:OnInitialize()
     self.db = LibStub("AceDB-3.0"):New("GuildScribeDB", defaults, true)
 
     -- Register options
-    self:RegisterConfig()
+    LibStub("AceConfig-3.0"):RegisterOptionsTable(addonName, self:GetOptionsTable())
+    LibStub("AceConfigDialog-3.0"):AddToBlizOptions(addonName, "GuildScribe")
 
     -- Minimap button
     local ldb = LibStub("LibDataBroker-1.1")
@@ -421,9 +422,12 @@ function GuildScribe:ShowPreview()
 end
 
 function GuildScribe:OpenConfig()
-    -- Double-call required for Blizzard options to actually open
-    InterfaceOptionsFrame_OpenToCategory(addonName)
-    InterfaceOptionsFrame_OpenToCategory(addonName)
+    if Settings and Settings.OpenToCategory then
+        Settings.OpenToCategory("GuildScribe")
+    elseif InterfaceOptionsFrame_OpenToCategory then
+        InterfaceOptionsFrame_OpenToCategory("GuildScribe")
+        InterfaceOptionsFrame_OpenToCategory("GuildScribe")
+    end
 end
 
 function GuildScribe:GetProfessionData()

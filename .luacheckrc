@@ -52,7 +52,7 @@ read_globals = {
 
     -- Guild API
     "IsInGuild", "GetNumGuildMembers", "GetGuildRosterInfo",
-    "GuildRoster", "GuildRosterSetPublicNote", "GuildRosterSetOfficerNote",
+    "C_GuildInfo", "GuildRosterSetPublicNote", "GuildRosterSetOfficerNote",
 
     -- Skill API
     "GetNumSkillLines", "GetSkillLineInfo", "ExpandSkillHeader",
@@ -60,7 +60,7 @@ read_globals = {
 
     -- Misc API
     "GetTime", "GetRealmName", "GetAddOnMetadata",
-    "InCombatLockdown", "InterfaceOptionsFrame_OpenToCategory",
+    "InCombatLockdown",
     "Settings", "C_Timer",
     "IsControlKeyDown",
     "RAID_CLASS_COLORS",
