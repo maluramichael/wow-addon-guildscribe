@@ -172,6 +172,11 @@ BuildNoteText = function(formatStr)
         ["{name}"] = UnitName("player") or "",
         ["{level}"] = tostring(UnitLevel("player") or 0),
         ["{class}"] = select(1, UnitClass("player")) or "",
+        -- PvP
+        ["{honor}"] = tostring(GetHonorCurrency and GetHonorCurrency() or 0),
+        ["{hks}"] = tostring(select(1, GetPVPLifetimeStats()) or 0),
+        -- Economy
+        ["{gold}"] = tostring(floor((GetMoney() or 0) / 10000)),
     }
 
     local result = formatStr

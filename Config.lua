@@ -79,7 +79,12 @@ function GuildScribe:GetOptionsTable()
                             "\n|cFFFFD100Character:|r\n" ..
                             "  {name} - Character name\n" ..
                             "  {level} - Character level\n" ..
-                            "  {class} - Class name",
+                            "  {class} - Class name\n" ..
+                            "\n|cFFFFD100PvP:|r\n" ..
+                            "  {honor} - Current honor points\n" ..
+                            "  {hks} - Lifetime honorable kills\n" ..
+                            "\n|cFFFFD100Economy:|r\n" ..
+                            "  {gold} - Gold (whole number)",
                         type = "description",
                         order = 2,
                         fontSize = "medium",

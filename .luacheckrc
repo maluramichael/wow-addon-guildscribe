@@ -58,6 +58,9 @@ read_globals = {
     "GetNumSkillLines", "GetSkillLineInfo", "ExpandSkillHeader",
     "CollapseSkillHeader",
 
+    -- PvP / Economy API
+    "GetHonorCurrency", "GetPVPLifetimeStats", "GetMoney",
+
     -- Misc API
     "GetTime", "GetRealmName", "GetAddOnMetadata",
     "InCombatLockdown",
