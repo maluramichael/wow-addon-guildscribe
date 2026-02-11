@@ -412,7 +412,7 @@ function GuildScribe:ForceUpdate()
 
     ScanProfessions()
     waitingForRoster = true
-    GuildRoster()
+    C_GuildInfo.GuildRoster()
     self:Print("Forcing guild note update...")
 end
 
